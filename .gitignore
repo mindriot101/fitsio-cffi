@@ -1,3 +1,5 @@
 venv
 .eggs
 .envrc
+_cfitsio*
+*.fits
