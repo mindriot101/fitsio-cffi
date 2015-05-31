@@ -6,3 +6,4 @@ _cfitsio*
 *.pyc
 *.egg-info
 build
+dist
