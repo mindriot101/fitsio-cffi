@@ -37,7 +37,7 @@ class FitsFile(object):
         status = ffi.new('int *')
         naxis = ffi.new('long[2]')
 
-        lib.fits_create_file(f, '!{filename}'.format(filename=filename), status)
+        lib.fits_create_file(f, str.encode('!{filename}'.format(filename=filename)), status)
         lib.fits_create_img(f[0], 8, 2, naxis, status)
 
         self = cls(f[0], status)
