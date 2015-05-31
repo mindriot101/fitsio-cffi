@@ -3,3 +3,6 @@ venv
 .envrc
 _cfitsio*
 *.fits
+*.pyc
+*.egg-info
+build

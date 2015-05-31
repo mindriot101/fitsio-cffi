@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from _cfitsio import ffi, lib
+from ._cfitsio import ffi, lib
 from contextlib import contextmanager
 
 class FitsException(Exception):
@@ -72,15 +72,3 @@ def open_fits(filename):
         yield self
     finally:
         self.close()
-
-if __name__ == '__main__':
-    try:
-        f = FitsFile.create('test.fits')
-        f.close()
-
-        fname = '/Users/simon/work/NGTS/pipeline/ZLP/zlp-flagging/testing/data/test.cat'
-        with open_fits(fname) as infile:
-            pass
-
-    except FitsException as err:
-        print(str(err))

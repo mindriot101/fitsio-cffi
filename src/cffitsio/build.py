@@ -5,6 +5,17 @@
 from cffi import FFI
 ffi = FFI()
 
+ffi.set_source('cffitsio._cfitsio',
+        """
+        #include <fitsio.h>
+
+        static void report_error(int status) {
+            fits_report_error(stderr, status);
+        }
+
+        """,
+        libraries=['cfitsio'])
+
 ffi.cdef("""
         typedef struct  {
             int filehandle;
@@ -26,16 +37,6 @@ ffi.cdef("""
 
         """)
 
-ffi.set_source('_cfitsio',
-        """
-        #include <fitsio.h>
-
-        static void report_error(int status) {
-            fits_report_error(stderr, status);
-        }
-
-        """,
-        libraries=['cfitsio'])
 
 
 if __name__ == '__main__':
