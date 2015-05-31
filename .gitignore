@@ -7,3 +7,4 @@ _cfitsio*
 *.egg-info
 build
 dist
+.tox
