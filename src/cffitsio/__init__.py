@@ -64,6 +64,9 @@ class FitsFile(object):
         lib.fits_movnam_hdu(self.fptr, -1, name, 0, self.status)
         self._check()
 
+    def __len__(self):
+        return 3
+
 
 @contextmanager
 def open_fits(filename):
