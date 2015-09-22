@@ -50,7 +50,21 @@ def test_fits_movabs_hdu(fits_open_file):
     f, status = fits_open_file
     exttype = ffi.new('int *')
     lib.fits_movabs_hdu(f[0], 2, exttype, status)
+    assert status[0] == 0
 
     hdunum = ffi.new('int *')
     lib.fits_get_hdu_num(f[0], hdunum)
+    assert status[0] == 0
+    assert hdunum[0] == 2
+
+
+def test_fits_movrel_hdu(fits_open_file):
+    f, status = fits_open_file
+    exttype = ffi.new('int *')
+    lib.fits_movrel_hdu(f[0], 1, exttype, status)
+    assert status[0] == 0
+
+    hdunum = ffi.new('int *')
+    lib.fits_get_hdu_num(f[0], hdunum)
+    assert status[0] == 0
     assert hdunum[0] == 2
