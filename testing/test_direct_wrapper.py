@@ -8,13 +8,13 @@ from cffitsio._cfitsio import ffi, lib
 def fits_open_file(test_file):
     f = ffi.new('fitsfile **')
     status = ffi.new('int *')
-    lib.fits_open_file(f, test_file, 0, status)
+    lib.fits_open_file(f, test_file.encode('utf-8'), 0, status)
     assert status[0] == 0
     return (f, status)
 
 
 def test_create_file(tmpdir):
-    filename = str(tmpdir.join('test.fits'))
+    filename = str(tmpdir.join('test.fits')).encode('utf-8')
     f = ffi.new('fitsfile **')
     status = ffi.new('int *')
     lib.fits_create_file(f, filename, status)
@@ -25,14 +25,14 @@ def test_create_file(tmpdir):
 def test_open_file(test_file):
     f = ffi.new('fitsfile **')
     status = ffi.new('int *')
-    lib.fits_open_file(f, test_file, 0, status)
+    lib.fits_open_file(f, test_file.encode('utf-8'), 0, status)
     assert status[0] == 0
 
 
 def test_close_file(test_file):
     f = ffi.new('fitsfile **')
     status = ffi.new('int *')
-    lib.fits_open_file(f, test_file, 0, status)
+    lib.fits_open_file(f, test_file.encode('utf-8'), 0, status)
     assert status[0] == 0
     lib.fits_close_file(f[0], status)
     assert status[0] == 0
