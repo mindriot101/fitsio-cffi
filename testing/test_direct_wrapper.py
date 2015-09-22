@@ -26,3 +26,14 @@ def test_close_file(test_file):
     assert status[0] == 0
     lib.fits_close_file(f[0], status)
     assert status[0] == 0
+
+
+def test_get_hdu_num(test_file):
+    f = ffi.new('fitsfile **')
+    status = ffi.new('int *')
+    lib.fits_open_file(f, test_file, 0, status)
+    assert status[0] == 0
+    # Should be open on the first hdu
+    hdunum = ffi.new('int *')
+    lib.fits_get_hdu_num(f[0], hdunum)
+    assert hdunum[0] == 1
