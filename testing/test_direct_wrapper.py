@@ -1,6 +1,16 @@
 import os
+import pytest
 
 from cffitsio._cfitsio import ffi, lib
+
+
+@pytest.fixture
+def fits_open_file(test_file):
+    f = ffi.new('fitsfile **')
+    status = ffi.new('int *')
+    lib.fits_open_file(f, test_file, 0, status)
+    assert status[0] == 0
+    return (f, status)
 
 
 def test_create_file(tmpdir):
@@ -28,11 +38,8 @@ def test_close_file(test_file):
     assert status[0] == 0
 
 
-def test_get_hdu_num(test_file):
-    f = ffi.new('fitsfile **')
-    status = ffi.new('int *')
-    lib.fits_open_file(f, test_file, 0, status)
-    assert status[0] == 0
+def test_get_hdu_num(fits_open_file):
+    f, status = fits_open_file
     # Should be open on the first hdu
     hdunum = ffi.new('int *')
     lib.fits_get_hdu_num(f[0], hdunum)
