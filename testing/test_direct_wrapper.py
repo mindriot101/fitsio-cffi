@@ -17,3 +17,12 @@ def test_open_file(test_file):
     status = ffi.new('int *')
     lib.fits_open_file(f, test_file, 0, status)
     assert status[0] == 0
+
+
+def test_close_file(test_file):
+    f = ffi.new('fitsfile **')
+    status = ffi.new('int *')
+    lib.fits_open_file(f, test_file, 0, status)
+    assert status[0] == 0
+    lib.fits_close_file(f[0], status)
+    assert status[0] == 0
