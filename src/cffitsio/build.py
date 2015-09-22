@@ -21,6 +21,7 @@ ffi.cdef("""
             int filehandle;
             ...;
         } FITSfile;
+
         typedef struct {
             int HDUposition;
             ...;
@@ -34,7 +35,6 @@ ffi.cdef("""
         int fits_movnam_hdu(fitsfile *fptr, int hdutype, char *extname, int extver, int *status);
         void fits_get_errstatus(int status, char *err_text);
         static void report_error(int status);
-
         """)
 
 
