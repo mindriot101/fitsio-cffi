@@ -44,3 +44,13 @@ def test_get_hdu_num(fits_open_file):
     hdunum = ffi.new('int *')
     lib.fits_get_hdu_num(f[0], hdunum)
     assert hdunum[0] == 1
+
+
+def test_fits_movabs_hdu(fits_open_file):
+    f, status = fits_open_file
+    exttype = ffi.new('int *')
+    lib.fits_movabs_hdu(f[0], 2, exttype, status)
+
+    hdunum = ffi.new('int *')
+    lib.fits_get_hdu_num(f[0], hdunum)
+    assert hdunum[0] == 2

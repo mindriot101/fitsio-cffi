@@ -34,6 +34,7 @@ ffi.cdef("""
         int fits_get_img_size(fitsfile *fptr, int maxdim, long *naxes, int *status);
         int fits_movnam_hdu(fitsfile *fptr, int hdutype, char *extname, int extver, int *status);
         int fits_get_hdu_num(fitsfile *fptr, int *chdunum);
+        int fits_movabs_hdu(fitsfile *fptr, int hdunum, int *exttype, int *status);
         void fits_get_errstatus(int status, char *err_text);
         static void report_error(int status);
         """)
