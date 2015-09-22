@@ -68,3 +68,11 @@ def test_fits_movrel_hdu(fits_open_file):
     lib.fits_get_hdu_num(f[0], hdunum)
     assert status[0] == 0
     assert hdunum[0] == 2
+
+
+def test_get_num_hdus(fits_open_file):
+    f, status = fits_open_file
+    nhdu = ffi.new('int *')
+    lib.fits_get_num_hdus(f[0], nhdu, status)
+    assert status[0] == 0
+    assert nhdu[0] == 3

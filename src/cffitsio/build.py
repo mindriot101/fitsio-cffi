@@ -36,6 +36,7 @@ ffi.cdef("""
         int fits_get_hdu_num(fitsfile *fptr, int *chdunum);
         int fits_movabs_hdu(fitsfile *fptr, int hdunum, int *exttype, int *status);
         int fits_movrel_hdu(fitsfile *fptr, int hdumov, int *exttype, int *status);
+        int fits_get_num_hdus(fitsfile *fptr, int *nhdu, int *status);
         void fits_get_errstatus(int status, char *err_text);
         static void report_error(int status);
         """)
